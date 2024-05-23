@@ -41,6 +41,11 @@ const Navbar = () => {
       <ul style={styles.ul}>
         <NavItem to="/home">Home</NavItem>
         <NavItem to="/overview">Overview</NavItem>
+        {/* <div className="dropdown-content">
+            <a href="/overview">Solution 1</a>
+            <a href="/overview">Solution 2</a>
+            <a href="/overview">Solution 3</a>
+        </div> */}
         <NavItem to="/methodology">Methodology</NavItem>
         <NavItem to="/offerings">Offerings</NavItem>
       </ul>
@@ -89,6 +94,15 @@ const styles = {
     alignItems: 'center',
     width: '100%',
   },
+  // dropdown: {
+  //   display: none,
+  //   position: absolute,
+  //   backgroundColor: '#f9f9f9',
+  //   width: '200px',
+  //   boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+  //   Index: 1,
+  // },
+
   li: {
     margin: '0 15px',
     color: '#fff',
@@ -114,3 +128,4 @@ const styles = {
 };
 
 export default App;
+

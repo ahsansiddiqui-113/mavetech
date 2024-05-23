@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaTwitter, FaFacebook, FaLinkedin } from 'react-icons/fa';
-import backgroundImage from 'E:/Mave technologies/mave-tech/src/assets/background.jpg';
+import backgroundImage from '../../assets/background.jpg';
 
 const Home = () => {
   const [showFooter, setShowFooter] = useState(false);
@@ -29,7 +29,7 @@ const Home = () => {
       margin: '0 auto',
       padding: '2rem',
       fontFamily: 'Arial, sans-serif',
-      backgroundImage: `url(${backgroundImage})`, // Replace URL with your image
+      backgroundImage: `url(${backgroundImage})`, 
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
