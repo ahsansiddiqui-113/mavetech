@@ -1,19 +1,18 @@
-import Methodology from './Components/Methodology/Methodology';
+// import Methodology from './Components/Methodology/Methodology';
 import Home from './Components/navbar/home';
 import Navbar from './Components/navbar/navbar';
 import RobotGIF from './Components/navbar/robotGIF';
-import Offerings from './Components/Offerings/Offering';
-// import './App.css';
-import Overview from './Components/Overview/Overview';
+// import Offerings from './Components/Offerings/Offering';
+// import Overview from './Components/Overview/Overview';
 
 function App() {
   return (
    <div>
      <Navbar/>
-     {/* <Home/> */}
-     <Overview/>
+      <Home/> 
+     {/* <Overview/>
      <Methodology/>
-     <Offerings/>
+     <Offerings/> */}
      <RobotGIF/>
 
    </div>
