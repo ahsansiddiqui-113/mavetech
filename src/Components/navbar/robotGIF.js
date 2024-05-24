@@ -13,14 +13,14 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh', // Full height of the viewport
-    overflow: 'hidden', // Hide any overflow
+    height: '100vh', 
+    overflow: 'hidden', 
   },
   gif: {
-    maxWidth: '100%', // Set maximum width to 100% of container
-    maxHeight: '100%', // Set maximum height to 100% of container
-    width: 'auto', // Maintain aspect ratio
-    height: 'auto', // Allow the image to adjust its height
+    maxWidth: '100%', 
+    maxHeight: '100%', 
+    width: 'auto',
+    height: 'auto', 
   },
 };
 

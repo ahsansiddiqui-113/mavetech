@@ -1,8 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import image from '../../assets/Illustration.jpeg';
-import medical from '../../assets/Medical.jpg'
+import medical from '../../assets/Medical.jpg';
 
 const CredentialingPage = () => {
+  const [expandedFAQ, setExpandedFAQ] = useState(null);
+  const [showMoreInfo, setShowMoreInfo] = useState(false);
+
+  const faqs = [
+    {
+      question: 'What Is Needed For Credentialing?',
+      answer: 'Credentialing typically requires documentation such as a medical license, malpractice insurance, and work history.',
+    },
+    {
+      question: 'How Long Does The Credentialing Process Take?',
+      answer: 'The credentialing process can take anywhere from a few weeks to several months depending on the completeness of your application and the responsiveness of the verifying institutions.',
+    },
+    {
+      question: 'How Can I Speed Up My Credentialing Application?',
+      answer: 'Ensure all required documents are complete and accurate, and respond promptly to any additional requests for information.',
+    },
+    {
+      question: 'After How Long Commercial Payers Re-Credentialing Is Required?',
+      answer: 'Re-credentialing is typically required every two to three years depending on the payer.',
+    },
+    {
+      question: 'Why Does Credentialing Take So Long?',
+      answer: 'Credentialing can take a long time due to the detailed verification process which includes checking education, training, work history, and malpractice history.',
+    },
+  ];
+
+  const toggleFAQ = (index) => {
+    setExpandedFAQ(expandedFAQ === index ? null : index);
+  };
+
+  const handleLearnMoreClick = () => {
+    setShowMoreInfo(!showMoreInfo);
+  };
+
   return (
     <div style={styles.credentialingPage}>
       <div style={styles.infoSection}>
@@ -13,18 +47,29 @@ const CredentialingPage = () => {
           information to deliver unambiguous provider enrollment and
           credentialing services.
         </p>
-        <button style={styles.button}>Learn More</button>
-      </div>
-      <div style={styles.formSection}>
-        <h2 style={styles.h2}>Get in Touch</h2>
-        <form style={styles.form}>
-          <input type="text" placeholder="Enter Name" style={styles.input} />
-          <input type="email" placeholder="Enter Email" style={styles.input} />
-          <input type="text" placeholder="Enter Number" style={styles.input} />
-          <input type="text" placeholder="Enter Subject" style={styles.input} />
-          <textarea placeholder="Message" style={styles.textarea}></textarea>
-          <button type="submit" style={styles.button}>Submit</button>
-        </form>
+        <button style={styles.button} onClick={handleLearnMoreClick}>
+          {showMoreInfo ? 'Show Less' : 'Learn More'}
+        </button>
+        {showMoreInfo && (
+          <div style={styles.moreInfo}>
+            <p style={styles.p}>
+              We offer a comprehensive suite of credentialing services designed to
+              meet the specific needs of healthcare providers and organizations.
+              Our team handles everything from initial application submission to
+              follow-up and re-credentialing, ensuring that you remain compliant
+              with all regulatory requirements. With a high acceptance rate and
+              a streamlined process, we minimize delays and get you credentialed
+              as quickly as possible.
+            </p>
+            <p style={styles.p}>
+              By choosing our credentialing services, you can focus on providing
+              quality care to your patients while we take care of the administrative
+              tasks. Our experts are well-versed in the latest regulations and
+              payer requirements, giving you peace of mind that your credentialing
+              needs are in capable hands.
+            </p>
+          </div>
+        )}
       </div>
       <div style={styles.statsSection}>
         <div style={styles.statItem}>
@@ -96,7 +141,9 @@ const CredentialingPage = () => {
             spectrum of Medical Billing and coding solutions for all sizes of
             organizations.
           </p>
-          <button style={styles.button}>Learn More</button>
+          <button style={styles.button} onClick={handleLearnMoreClick}>
+          {showMoreInfo ? 'Show Less' : 'Learn More'}
+        </button>
         </div>
         <div style={styles.imageSection}>
           <img
@@ -112,18 +159,54 @@ const CredentialingPage = () => {
           <h2>FAQs</h2>
         </div>
         <div style={styles.faqList}>
-          {[
-            'What Is Needed For Credentialing?',
-            'How Long Does The Credentialing Process Take?',
-            'How Can I Speed Up My Credentialing Application?',
-            'After How Long Commercial Payers Re-Credentialing Is Required?',
-            'Why Does Credentialing Take So Long?',
-          ].map((question, index) => (
-            <div key={index} style={styles.faqItem}>
-              <p style={styles.faqQuestion}>{question}</p>
+          {faqs.map((faq, index) => (
+            <div key={index} style={styles.faqItem} onClick={() => toggleFAQ(index)}>
+              <p style={styles.faqQuestion}>{faq.question}</p>
+              {expandedFAQ === index && <p style={styles.faqAnswer}>{faq.answer}</p>}
             </div>
           ))}
         </div>
+      </div>
+      <div style={styles.formSection}>
+        <h2 style={styles.h2}>Get in Touch</h2>
+        <form
+  style={styles.form}
+  onSubmit={async (e) => {
+    e.preventDefault();
+    const formData = {
+      name: e.target[0].value,
+      email: e.target[1].value,
+      number: e.target[2].value,
+      subject: e.target[3].value,
+      message: e.target[4].value
+    };
+    try {
+      const response = await fetch('http://localhost:5000/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      if (response.ok) {
+        alert('Message sent successfully');
+      } else {
+        alert('Error sending message');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error sending message');
+    }
+  }}
+>
+  <input type="text" placeholder="Enter Name" style={styles.input} />
+  <input type="email" placeholder="Enter Email" style={styles.input} />
+  <input type="text" placeholder="Enter Number" style={styles.input} />
+  <input type="text" placeholder="Enter Subject" style={styles.input} />
+  <textarea placeholder="Message" style={styles.textarea}></textarea>
+  <button type="submit" style={styles.button}>Submit</button>
+</form>
+
       </div>
     </div>
   );
@@ -148,50 +231,6 @@ const styles = {
     color: '#2b2b2b',
     margin: '20px 0',
   },
-  coreServices: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '20px',
-    backgroundColor: '#f9f9f9',
-  },
-  textSection: {
-    flex: 1,
-    paddingRight: '20px',
-  },
-  title: {
-    fontSize: '2rem',
-    color: '#003366',
-    marginBottom: '10px',
-  },
-  subtitle: {
-    fontSize: '1.2rem',
-    color: '#2b2b2b',
-    marginBottom: '10px',
-  },
-  description: {
-    fontSize: '1rem',
-    color: '#5a5a5a',
-    marginBottom: '20px',
-  },
-  button: {
-    backgroundColor: '#003366',
-    color: 'white',
-    border: 'none',
-    padding: '10px 20px',
-    fontSize: '1rem',
-    cursor: 'pointer',
-    borderRadius: '5px',
-  },
-  imageSection: {
-    flex: 1,
-    textAlign: 'center',
-  },
-  image: {
-    maxWidth: '100%',
-    height: 'auto',
-  },
-
   p: {
     fontSize: '1.1rem',
     color: '#5a5a5a',
@@ -206,85 +245,44 @@ const styles = {
     cursor: 'pointer',
     borderRadius: '5px',
     transition: 'background-color 0.3s ease',
-    ':hover': {
-      backgroundColor: '#0055a5',
-    },
   },
-  formSection: {
-    width: '100%',
-    maxWidth: '500px',
-    marginBottom: '20px',
-    padding: '0 20px',
-  },
-  h2: {
-    fontSize: '2rem',
-    color: '#2b2b2b',
-    textAlign: 'center',
-    marginBottom: '20px',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  input: {
-    marginBottom: '15px',
-    padding: '12px',
-    fontSize: '1.1rem',
-    border: '1px solid #ccc',
+  moreInfo: {
+    marginTop: '20px',
+    backgroundColor: '#e6f0fa',
+    padding: '15px',
     borderRadius: '5px',
-    ':focus': {
-      borderColor: '#003366',
-      outline: 'none',
-    },
-  },
-  textarea: {
-    marginBottom: '15px',
-    padding: '12px',
-    fontSize: '1.1rem',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-    ':focus': {
-      borderColor: '#003366',
-      outline: 'none',
-    },
+    textAlign: 'left',
   },
   statsSection: {
     display: 'flex',
     justifyContent: 'space-around',
+    marginBottom: '20px',
     width: '100%',
-    backgroundColor: '#003366',
-    padding: '20px',
-    borderRadius: '10px',
-    margin: '20px 0',
-    color: 'white',
-    flexWrap: 'wrap',
   },
   statItem: {
     textAlign: 'center',
-    margin: '10px',
   },
   statNumber: {
-    fontSize: '2.5rem',
-    margin: '0',
+    fontSize: '2rem',
+    color: '#003366',
   },
   statLabel: {
-    fontSize: '1.2rem',
-    margin: '5px 0 0 0',
+    fontSize: '1rem',
+    color: '#5a5a5a',
   },
   descriptionSection: {
     textAlign: 'center',
-    padding: '20px',
-    width: '100%',
+    marginBottom: '20px',
   },
   descriptionTitle: {
     fontSize: '2rem',
-    color: '#2b2b2b',
+    color: '#003366',
     marginBottom: '10px',
   },
   descriptionText: {
     fontSize: '1.1rem',
     color: '#5a5a5a',
-    margin: '10px 0',
+    marginBottom: '20px',
   },
   importantSection: {
     textAlign: 'left',
@@ -313,12 +311,45 @@ const styles = {
     height: 'auto',
     borderRadius: '10px',
   },
+  coreServices: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '20px',
+    backgroundColor: '#f9f9f9',
+    width: '100%',
+  },
+  textSection: {
+    flex: 1,
+    paddingRight: '20px',
+  },
+  title: {
+    fontSize: '2rem',
+    color: '#003366',
+    marginBottom: '10px',
+  },
+  subtitle: {
+    fontSize: '1.2rem',
+    color: '#2b2b2b',
+    marginBottom: '10px',
+  },
+  description: {
+    fontSize: '1rem',
+    color: '#5a5a5a',
+    marginBottom: '20px',
+  },
+  imageSection: {
+    flex: 1,
+    textAlign: 'center',
+  },
   faqs: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     padding: '20px',
     backgroundColor: '#f9f9f9',
+    margin: '20px 0',
+    width: '100%',
   },
   iconSection: {
     textAlign: 'center',
@@ -339,14 +370,46 @@ const styles = {
     borderRadius: '5px',
     cursor: 'pointer',
     transition: 'background-color 0.3s ease',
-    ':hover': {
-      backgroundColor: '#d4e4f7',
-    },
   },
   faqQuestion: {
     fontSize: '1rem',
     color: '#003366',
     margin: 0,
+  },
+  faqAnswer: {
+    fontSize: '1rem',
+    color: '#333',
+    marginTop: '10px',
+  },
+  formSection: {
+    width: '100%',
+    maxWidth: '500px',
+    marginBottom: '20px',
+    padding: '0 20px',
+    textAlign: 'center',
+  },
+  h2: {
+    fontSize: '2rem',
+    color: '#2b2b2b',
+    marginBottom: '20px',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  input: {
+    marginBottom: '15px',
+    padding: '12px',
+    fontSize: '1.1rem',
+    border: '1px solid #ccc',
+    borderRadius: '5px',
+  },
+  textarea: {
+    marginBottom: '15px',
+    padding: '12px',
+    fontSize: '1.1rem',
+    border: '1px solid #ccc',
+    borderRadius: '5px',
   },
   '@media (minWidth: 768px)': {
     credentialingPage: {
@@ -362,9 +425,7 @@ const styles = {
     statsSection: {
       flexDirection: 'row',
     },
-
   },
 };
-
 
 export default CredentialingPage;

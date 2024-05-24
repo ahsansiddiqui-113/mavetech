@@ -24,15 +24,10 @@ const Home = () => {
 
   const styles = {
     container: {
-      display:'flex',
       maxWidth: '1200px',
       margin: '0 auto',
       padding: '2rem',
       fontFamily: 'Arial, sans-serif',
-      backgroundImage: `url(${backgroundImage})`, 
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
     },
     main: {
       display: 'flex',
@@ -84,21 +79,58 @@ const Home = () => {
     },
     socialMedia: {
       marginBottom: '1rem',
+      display: 'flex',
+      justifyContent: 'center',
+      gap: '10px',
     },
     socialLink: {
-      color: '#343f4d',
+      color: '#fff',
       fontSize: '24px',
-      margin: '0 10px',
       textDecoration: 'none',
     },
     copyRight: {
       fontSize: '14px',
       margin: '0',
     },
+    contactInfo: {
+      marginTop: '1rem',
+      color: '#6c757d',
+    },
+    contactLink: {
+      color: '#fff',
+      textDecoration: 'none',
+    },
   };
 
   return (
     <div style={styles.container}>
+      <main style={styles.main}>
+        <section style={styles.section}>
+          <h2 style={styles.sectionH2}>About Us</h2>
+          <p style={styles.sectionP}>
+            Welcome to Mave Technologies, where innovation meets excellence. We are committed to providing top-notch tech solutions that drive success for businesses of all sizes. Our mission is to empower our clients through cutting-edge technology and unparalleled support.
+          </p>
+          <p style={styles.sectionP}>
+            Established in 2010, we have a decade of experience in delivering high-quality software development, IT consulting, and digital transformation services. Join us on our journey to make the world a more connected and efficient place.
+          </p>
+        </section>
+        <section style={styles.section}>
+          <h2 style={styles.sectionH2}>Our Services</h2>
+          <p style={styles.sectionP}>
+            At Mave Technologies, we offer a wide range of services to meet your business needs:
+          </p>
+          <ul style={styles.sectionP}>
+            <li>Custom Software Development</li>
+            <li>IT Consulting</li>
+            <li>Cloud Solutions</li>
+            <li>Cybersecurity Services</li>
+            <li>Digital Transformation</li>
+          </ul>
+          <p style={styles.sectionP}>
+            Our team of experts is dedicated to providing personalized solutions that help you achieve your business goals. We leverage the latest technologies to deliver innovative and reliable services.
+          </p>
+        </section>
+      </main>
       {showFooter && (
         <footer style={styles.footer}>
           <div style={styles.socialMedia}>
@@ -107,15 +139,14 @@ const Home = () => {
             <a href="https://linkedin.com" style={styles.socialLink}><FaLinkedin /></a>
           </div>
           <p style={styles.copyRight}>© 2024 Mave Technologies. All rights reserved.</p>
-          <section>
-            <h2 style={{ color: '#6c757d', fontSize: '1.2rem', marginBottom: '1rem' }}>Let's Connect</h2>
-            <p style={{ color: '#6c757d', marginBottom: '0.5rem' }}>
-              Call Us: <a href="tel:03345440774" style={{ color: '#fff', textDecoration: 'none' }}>03345440774</a>
+          <div style={styles.contactInfo}>
+            <p>
+              Call Us: <a href="tel:03345440774" style={styles.contactLink}>03345440774</a>
             </p>
-            <p style={{ color: '#6c757d', marginBottom: '0.5rem' }}>
-              Email: <a href="mailto:example@gmail.com" style={{ color: '#fff', textDecoration: 'none' }}>example@gmail.com</a>
+            <p>
+              Email: <a href="mailto:example@gmail.com" style={styles.contactLink}>example@gmail.com</a>
             </p>
-          </section>
+          </div>
         </footer>
       )}
     </div>

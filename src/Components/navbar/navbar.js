@@ -85,7 +85,7 @@ const styles = {
     alignItems: 'center',
     width: '100%',
     margin: '0 auto',
-    backgroundColor: '#123d',
+    backgroundColor: '#000000',
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
   },
   ul: {
