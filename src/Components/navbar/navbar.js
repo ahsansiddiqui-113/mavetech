@@ -4,6 +4,7 @@ import Home from '../navbar/home.js';
 import Overview from '../Overview/Overview.js';
 import Methodology from '../Methodology/Methodology.js';
 import Offerings from '../Offerings/Offering.js';
+import CredentialingPage from '../services/credentials.js'
 
 const Navbar = () => {
   const [dropdowns, setDropdowns] = useState({
@@ -48,6 +49,7 @@ const Navbar = () => {
         </div> */}
         <NavItem to="/methodology">Methodology</NavItem>
         <NavItem to="/offerings">Offerings</NavItem>
+        <NavItem to="/credentials">Credentials</NavItem>
       </ul>
     </nav>
   );
@@ -70,6 +72,7 @@ const App = () => (
         <Route path="/overview" element={<Overview />} />
         <Route path="/methodology" element={<Methodology />} />
         <Route path="/offerings" element={<Offerings />} />
+        <Route path="/credentials" element={<CredentialingPage />} />
       </Routes>
     </main>
   </Router>
