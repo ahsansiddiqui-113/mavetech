@@ -141,10 +141,10 @@ const Home = () => {
           <p style={styles.copyRight}>© 2024 Mave Technologies. All rights reserved.</p>
           <div style={styles.contactInfo}>
             <p>
-              Call Us: <a href="tel:03345440774" style={styles.contactLink}>03345440774</a>
+              Call Us: <a href="tel:(914)348-9506" style={styles.contactLink}>(914)348-9506</a>
             </p>
             <p>
-              Email: <a href="mailto:example@gmail.com" style={styles.contactLink}>example@gmail.com</a>
+              Email: <a href="mailto:credentialing@mavetech.co" style={styles.contactLink}>credentialing@mavetech.co</a>
             </p>
           </div>
         </footer>
